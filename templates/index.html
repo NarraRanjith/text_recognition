@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Character Recognition</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <main>
+      <h1>Character Recognition</h1>
+      <form method="post" action="{{ url_for('predict') }}" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload & Predict</button>
+      </form>
+
+      {% if error %}
+      <section class="result error">
+        <h2>Error</h2>
+        <p>{{ error }}</p>
+      </section>
+      {% endif %}
+
+      {% if filename %}
+      <section class="result">
+        <h2>Prediction</h2>
+        <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="uploaded image">
+        <p><strong>Label:</strong> {{ label }}</p>
+        {% if confidence is defined %}
+        <p><strong>Confidence:</strong> {{ '%.2f'|format(confidence * 100) }}%</p>
+        {% endif %}
+      </section>
+      {% endif %}
+    </main>
+  </body>
+  </html>

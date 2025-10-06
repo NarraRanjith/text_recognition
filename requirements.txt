@@ -1,0 +1,6 @@
+flask>=2.0
+tensorflow>=2.10
+keras-nightly
+opencv-python
+numpy
+werkzeug
